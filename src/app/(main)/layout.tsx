@@ -2,7 +2,7 @@ import '../../styles/globals.css';
 
 import React from 'react';
 import { Montserrat } from '@next/font/google';
-import { unstable_getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth';
 
 import { authOptions } from '@api/auth/[...nextauth]';
 import { spotifyApi } from '@libs/spotify';
@@ -23,7 +23,7 @@ const montserrat = Montserrat({
 });
 
 async function fetchData() {
-  const session = await unstable_getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
   const accessToken = session?.accessToken as string;
 
   spotifyApi.setAccessToken(accessToken);

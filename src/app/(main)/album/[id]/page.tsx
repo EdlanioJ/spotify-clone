@@ -3,7 +3,7 @@ import AlbumCover from '@components/AlbumCover';
 import AlbumTrackTable from '@components/AlbumTrackTable';
 import DiscographyPlaylist from '@components/DiscographyPlaylist';
 import { spotifyApi } from '@libs/spotify';
-import { unstable_getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth';
 
 type PageProps = {
   params: {
@@ -12,7 +12,7 @@ type PageProps = {
 };
 
 async function fetchData(id: string) {
-  const session = await unstable_getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
 
   const accessToken = session?.accessToken as string;
   spotifyApi.setAccessToken(accessToken);

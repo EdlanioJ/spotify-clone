@@ -1,4 +1,4 @@
-import { unstable_getServerSession } from 'next-auth/next';
+import { getServerSession } from 'next-auth/next';
 
 import { spotifyApi } from '@libs/spotify';
 import { authOptions } from '@api/auth/[...nextauth]';
@@ -9,7 +9,7 @@ import FeaturedPlaylist from '@components/FeaturedPlaylist';
 import { Recolor } from '@context/ColorContext';
 
 async function fetchData() {
-  const session = await unstable_getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
 
   const accessToken = session?.accessToken as string;
   spotifyApi.setAccessToken(accessToken);

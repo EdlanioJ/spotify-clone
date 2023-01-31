@@ -2,7 +2,7 @@ import { authOptions } from '@api/auth/[...nextauth]';
 import { CategoryCover } from '@components/CategoryCover';
 import { CategoryPlaylists } from '@components/CategoryPlaylists';
 import { spotifyApi } from '@libs/spotify';
-import { unstable_getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth';
 
 type PageProps = {
   params: {
@@ -11,7 +11,7 @@ type PageProps = {
 };
 
 async function fetchData(category: string) {
-  const session = await unstable_getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
   const accessToken = session?.accessToken as string;
   spotifyApi.setAccessToken(accessToken);
   const [

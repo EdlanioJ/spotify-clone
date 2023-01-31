@@ -1,4 +1,4 @@
-import { unstable_getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth';
 
 import { authOptions } from '@api/auth/[...nextauth]';
 import { spotifyApi } from '@libs/spotify';
@@ -14,7 +14,7 @@ type Props = {
 };
 
 async function fetchData(artistId: string) {
-  const session = await unstable_getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
   const accessToken = session?.accessToken as string;
 
   spotifyApi.setAccessToken(accessToken);
