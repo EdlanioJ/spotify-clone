@@ -38,31 +38,31 @@ module.exports = {
       keyframes: {
         'left-bobble': {
           '0%, 100%': {
-            transform: 'translateX(0px) scale(1)',
+            transform: 'translateX(0px) scale(0.75)',
             'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)',
           },
           '50%': {
-            transform: 'translateX(-10px) scale(0.75)',
+            transform: 'translateX(-10px) scale(1.1)',
             'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)',
           },
         },
         'center-bobble': {
           '0%, 100%': {
-            transform: 'scale(1)',
+            transform: 'scale(0.75)',
             'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)',
           },
           '50%': {
-            transform: 'scale(0.75)',
+            transform: 'scale(1.1)',
             'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)',
           },
         },
         'right-bobble': {
           '0%, 100%': {
-            transform: 'translateX(0px) scale(1)',
+            transform: 'translateX(0px) scale(0.75)',
             'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)',
           },
           '50%': {
-            transform: 'translateX(10px) scale(0.75)',
+            transform: 'translateX(10px) scale(1.1)',
             'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)',
           },
         },
