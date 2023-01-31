@@ -47,9 +47,9 @@ async function fetchData(artistId: string) {
 export default async function Page({ params }: Props) {
   const {
     artist,
-    artistTopTracks,
     artistAlbums,
     artistSingles,
+    artistTopTracks,
     artistAppearsOn,
     artistRelatedArtists,
   } = await fetchData(params.id);

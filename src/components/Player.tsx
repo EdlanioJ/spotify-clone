@@ -17,32 +17,51 @@ import { ToolTip } from './ToolTip';
 
 type Props = {
   currentPlayingTrack?: SpotifyApi.CurrentlyPlayingResponse;
+  playingItemInfo?: SpotifyApi.TrackObjectFull | SpotifyApi.EpisodeObject;
 };
-export default function Player({ currentPlayingTrack }: Props) {
+
+export default function Player({
+  currentPlayingTrack,
+  playingItemInfo,
+}: Props) {
   return (
     <footer className="w-full h-[10vh] text-gray-100 bg-gray-300 z-[100] grid grid-cols-12 gap-10 items-center justify-between px-3 border-[#272727]">
       {/** Player Track Info */}
       <div className="flex items-center col-span-3 gap-3">
-        <Image
-          alt="Cover"
-          src="https://github.com/edlanioj.png"
-          width={100}
-          height={100}
-          className="w-12 h-12"
-        />
-        <div className="max-w-full">
-          <h2 className="text-sm font-semibold truncate cursor-pointer hover:underline">
-            Rich Flex
-          </h2>
-          <span className="text-xs font-medium truncate leading-[0] hover:underline cursor-pointer">
-            Drake, 21 Savage
-          </span>
-        </div>
-        <div>
-          <ToolTip tooltip="Guardar em A tua biblioteca">
-            <Heart weight="bold" className="text-sm text-gray-100" />
-          </ToolTip>
-        </div>
+        {currentPlayingTrack && playingItemInfo && (
+          <>
+            <Image
+              alt="Cover"
+              src={
+                playingItemInfo.type === 'track'
+                  ? playingItemInfo.album.images[0].url
+                  : playingItemInfo.images[0].url
+              }
+              width={100}
+              height={100}
+              className="w-12 h-12"
+            />
+            <div className="max-w-full">
+              <h2 className="text-sm font-semibold truncate cursor-pointer hover:underline">
+                {currentPlayingTrack?.item?.name}
+              </h2>
+              <span className="text-xs font-medium truncate leading-[0] hover:underline cursor-pointer">
+                {playingItemInfo.type === 'track'
+                  ? playingItemInfo.artists
+                      .map((artist) => {
+                        return artist.name;
+                      })
+                      .join(', ')
+                  : playingItemInfo.show.name}
+              </span>
+            </div>
+            <div>
+              <ToolTip tooltip="Guardar em A tua biblioteca">
+                <Heart weight="bold" className="text-sm text-gray-100" />
+              </ToolTip>
+            </div>
+          </>
+        )}
       </div>
       {/** Main Controller */}
       <div className="flex flex-col justify-center items-center col-span-6 gap-3">
