@@ -27,13 +27,36 @@ async function fetchData() {
   const accessToken = session?.accessToken as string;
 
   spotifyApi.setAccessToken(accessToken);
+
   const [{ body: playlists }, { body: currentPlayingTrack }] =
     await Promise.all([
       spotifyApi.getUserPlaylists(),
       spotifyApi.getMyCurrentPlayingTrack(),
     ]);
 
-  return { playlists, currentPlayingTrack, user: session?.user };
+  let playingItemInfo:
+    | SpotifyApi.TrackObjectFull
+    | SpotifyApi.EpisodeObject
+    | undefined;
+
+  if (currentPlayingTrack.item) {
+    if (currentPlayingTrack.currently_playing_type === 'track') {
+      const { body } = await spotifyApi.getTrack(currentPlayingTrack.item.id);
+      playingItemInfo = body;
+    }
+
+    if (currentPlayingTrack.currently_playing_type === 'episode') {
+      const { body } = await spotifyApi.getEpisode(currentPlayingTrack.item.id);
+      playingItemInfo = body;
+    }
+  }
+
+  return {
+    playlists,
+    currentPlayingTrack,
+    playingItemInfo,
+    user: session?.user,
+  };
 }
 
 export default async function RootLayout({
@@ -41,7 +64,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { currentPlayingTrack, playlists, user } = await fetchData();
+  const { currentPlayingTrack, playlists, user, playingItemInfo } =
+    await fetchData();
 
   return (
     <html className={montserrat.className}>
@@ -64,7 +88,10 @@ export default async function RootLayout({
               </main>
             </div>
             {/* Player */}
-            <Player currentPlayingTrack={currentPlayingTrack} />
+            <Player
+              currentPlayingTrack={currentPlayingTrack}
+              playingItemInfo={playingItemInfo}
+            />
           </div>
         </SessionProvider>
       </body>
