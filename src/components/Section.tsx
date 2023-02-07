@@ -43,7 +43,7 @@ function Text({ variant = 'heading', children }: TextProps) {
   return (
     <span
       className={clsx('text-zinc-300 hover:underline cursor-pointer', {
-        'font-bold text-xl': variant === 'heading',
+        'font-semibold text-2xl': variant === 'heading',
         'uppercase font-semibold text-xs text-zinc-500': variant === 'link',
       })}
     >
