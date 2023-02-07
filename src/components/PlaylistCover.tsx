@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import { useColor } from '@context/ColorContext';
 import { Heart, Play } from 'phosphor-react';
-import { ToolTip } from './ToolTip';
 import { millisecondsToHuman } from '@utils/millisecondsToHuman';
+import { ToolTip } from './ToolTip';
 
 type Props = {
   playlist: SpotifyApi.SinglePlaylistResponse;
