@@ -1,12 +1,13 @@
 'use client';
 
-import clsx from 'clsx';
-import { WarningCircle } from 'phosphor-react';
 import { useEffect } from 'react';
+import clsx from 'clsx';
+import Link from 'next/link';
+import { WarningCircle } from 'phosphor-react';
 
 export default function Error({ error, reset }: any) {
   useEffect(() => {
-    console.log({ error });
+    console.log(error);
   }, [error]);
   return (
     <div
@@ -18,14 +19,21 @@ export default function Error({ error, reset }: any) {
     >
       <WarningCircle className="text-6xl" weight="bold" />
       <span className="text-3xl font-bold">
-        Ocorreu um problema ao carregar essa pagina
+        Ocorreu um problema ao carregar o album.
       </span>
-      <button
-        className="p-2 px-4 rounded-full bg-white font-semibold text-gray-700 text-sm transition-all hover:scale-105"
-        onClick={() => reset()}
-      >
-        Recarregar
-      </button>
+
+      <span className="font-medium">Queres procurar outra coisa?</span>
+      <Link href="/">
+        <div
+          className={clsx(
+            'p-2 px-4 rounded-full',
+            'bg-white text-gray-700 text-sm font-semibold',
+            'transition-all hover:scale-105'
+          )}
+        >
+          Início
+        </div>
+      </Link>
     </div>
   );
 }
