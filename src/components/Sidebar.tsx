@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Slot } from '@radix-ui/react-slot';
 import {
   BookmarkSimple,
@@ -17,6 +18,7 @@ type Props = {
 };
 
 export default function Sidebar({ playlists }: Props) {
+  const pathname = usePathname();
   return (
     <aside className="w-56 h-full bg-black flex-none text-gray-200">
       <div className="relative h-10 w-32 self-start mt-4 mx-2">
@@ -35,7 +37,7 @@ export default function Sidebar({ playlists }: Props) {
         <Link href="/">
           <Item>
             <Icon>
-              <House weight="fill" />
+              <House weight={pathname === '/' ? 'fill' : 'light'} />
             </Icon>
             <Text>Inicio</Text>
           </Item>
@@ -44,9 +46,11 @@ export default function Sidebar({ playlists }: Props) {
         <Link href="/search">
           <Item>
             <Icon>
-              <MagnifyingGlass weight="bold" />
+              <MagnifyingGlass
+                weight={pathname?.includes('/search') ? 'fill' : 'bold'}
+              />
             </Icon>
-            <Text>Buscar</Text>
+            <Text>Procurar</Text>
           </Item>
         </Link>
 
