@@ -1,11 +1,12 @@
 'use client';
 
-import React, { AnchorHTMLAttributes, Fragment, use } from 'react';
+import React, { AnchorHTMLAttributes, Fragment } from 'react';
 import { Menu as HeadlessMenu, Transition } from '@headlessui/react';
 import clsx from 'clsx';
-import { Session } from 'next-auth';
+import type { Session } from 'next-auth';
 import Image from 'next/image';
-import { ArrowSquareOut, CaretDown } from 'phosphor-react';
+import { ArrowSquareOut } from 'phosphor-react';
+
 import { ToolTip } from './ToolTip';
 
 type Props = {
