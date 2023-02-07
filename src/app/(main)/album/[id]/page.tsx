@@ -25,7 +25,7 @@ async function fetchData(id: string) {
   return { album, discography };
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function AlbumPage({ params }: PageProps) {
   const { album, discography } = await fetchData(params.id);
 
   return (
@@ -51,7 +51,6 @@ export default async function Page({ params }: PageProps) {
       </div>
       <DiscographyPlaylist
         artist={album.artists[0]}
-        exceptAlbumId={album.id}
         albums={discography.items}
       />
     </div>
