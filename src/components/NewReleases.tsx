@@ -1,7 +1,8 @@
 'use client';
 
-import Section from '@components/Section';
 import Link from 'next/link';
+
+import Section from './Section';
 import AlbumCard from './AlbumCard';
 
 type Props = {
