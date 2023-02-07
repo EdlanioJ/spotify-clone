@@ -27,6 +27,15 @@ const nextConfig = {
       {
         hostname: 'seed-mix-image.spotifycdn.com',
       },
+      {
+        hostname: 'mosaic.scdn.co',
+      },
+      {
+        hostname: 'seeded-session-images.scdn.co',
+      },
+      {
+        hostname: 'thisis-images.scdn.co',
+      },
     ],
   },
   experimental: {
