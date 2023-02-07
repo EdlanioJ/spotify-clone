@@ -11,7 +11,7 @@ export default function CategoryCard({ category }: Props) {
       <Image
         alt={category.id}
         src={category.icons[0].url}
-        className="w-full shadow-[0px_8px_24px_rgba(0,0,0,0.5)]"
+        className="w-full"
         width={100}
         height={100}
       />
