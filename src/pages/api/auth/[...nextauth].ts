@@ -1,8 +1,6 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
-
-import GoogleProvider from 'next-auth/providers/google';
 import SpotifyProvider from 'next-auth/providers/spotify';
-import { loginUrl, Scopes, spotifyApi } from '../../../libs/spotify';
+import { loginUrl, spotifyApi } from '../../../libs/spotify';
 
 async function refreshAccessToken(token: any) {
   try {
@@ -71,7 +69,7 @@ export const authOptions: NextAuthOptions = {
       };
     },
   },
-  debug: true,
+  debug: process.env.NODE_ENV !== 'production',
   secret: process.env.NEXTAUTH_SECRET,
 };
 
