@@ -3,10 +3,12 @@ import { getServerSession } from 'next-auth/next';
 import { spotifyApi } from '@libs/spotify';
 import { authOptions } from '@api/auth/[...nextauth]';
 
-import CategoryList from '@components/CategoryList';
 import NewReleases from '@components/NewReleases';
 import FeaturedPlaylist from '@components/FeaturedPlaylist';
 import { Recolor } from '@context/ColorContext';
+import MySavedShows from './MySavedShows';
+import TopListPlaylist from './TopListPlaylist';
+import MyRecentlyPlayed from './MyRecentlyPlayed';
 
 async function fetchData() {
   const session = await getServerSession(authOptions);
@@ -17,23 +19,93 @@ async function fetchData() {
   const [
     { body: newReleases },
     { body: featuredPlaylist },
-    { body: categories },
+    { body: mySavedShows },
+    { body: topLists },
+    { body: myRecentlyPlayedTracks },
   ] = await Promise.all([
     spotifyApi.getNewReleases(),
     spotifyApi.getFeaturedPlaylists(),
-    spotifyApi.getCategories(),
+    spotifyApi.getMySavedShows(),
+    spotifyApi.getPlaylistsForCategory('toplists'),
+    spotifyApi.getMyRecentlyPlayedTracks(),
   ]);
 
-  return { newReleases, featuredPlaylist, categories };
+  const artistIds = myRecentlyPlayedTracks.items
+    .filter((value) => value.context && value.context.type === 'artist')
+    .map((value) => {
+      const url = value.context.uri.split(':');
+      const id = url[url.length - 1];
+      return id;
+    })
+    .filter((value, index, self) => {
+      return self.indexOf(value) === index;
+    });
+
+  const playlistIds = myRecentlyPlayedTracks.items
+    .filter((value) => value.context && value.context.type === 'playlist')
+    .map((value) => {
+      const url = value.context.uri.split(':');
+      const id = url[url.length - 1];
+      return id;
+    })
+    .filter((value, index, self) => {
+      return self.indexOf(value) === index;
+    });
+
+  const { body: artists } = await spotifyApi.getArtists(artistIds);
+
+  const artistsInMyRecentlyPlayed = artists.artists.reduce<{
+    [key: string]: SpotifyApi.ArtistObjectFull;
+  }>((lookup, artist) => {
+    lookup[artist.uri] = artist;
+    return lookup;
+  }, {});
+
+  const playlists = await Promise.all(
+    playlistIds.map((playlistId) => spotifyApi.getPlaylist(playlistId))
+  );
+
+  const playlistsInMyRecentlyPlayed = playlists.reduce<{
+    [key: string]: SpotifyApi.PlaylistObjectSimplified;
+  }>((lookup, playlist) => {
+    lookup[playlist.body.uri] = playlist.body;
+    return lookup;
+  }, {});
+
+  return {
+    topLists,
+    newReleases,
+    mySavedShows,
+    featuredPlaylist,
+    myRecentlyPlayedTracks,
+    artistsInMyRecentlyPlayed,
+    playlistsInMyRecentlyPlayed,
+  };
 }
 
 export default async function HomePage() {
-  const { newReleases, featuredPlaylist, categories } = await fetchData();
+  const {
+    topLists,
+    newReleases,
+    mySavedShows,
+    featuredPlaylist,
+    myRecentlyPlayedTracks,
+    artistsInMyRecentlyPlayed,
+    playlistsInMyRecentlyPlayed,
+  } = await fetchData();
 
   return (
     <div className="pb-20">
+      <MyRecentlyPlayed
+        playHistory={myRecentlyPlayedTracks.items}
+        artists={artistsInMyRecentlyPlayed}
+        playlists={playlistsInMyRecentlyPlayed}
+      />
+      {mySavedShows && mySavedShows.items.length !== 0 && (
+        <MySavedShows shows={mySavedShows.items} />
+      )}
       <NewReleases data={newReleases} />
-      <CategoryList data={categories} />
+      <TopListPlaylist playlists={topLists.playlists.items} />
       <FeaturedPlaylist data={featuredPlaylist} />
       <Recolor />
     </div>
