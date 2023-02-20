@@ -70,9 +70,9 @@ export default async function RootLayout({
   return (
     <html className={montserrat.className}>
       <head />
-      <body>
+      <body className="antialiased">
         <SessionProvider>
-          <div className="h-screen bg-gray-700 overflow-hidden">
+          <div className="h-screen bg-gray-700 overflow-hidden antialiased">
             <div className="flex h-[90vh]">
               {/* Sidebar */}
               <Sidebar playlists={playlists} />
