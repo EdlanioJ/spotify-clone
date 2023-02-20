@@ -15,7 +15,7 @@ export default function ArtistRelated({ artists }: Props) {
         <Section.Text>Os fãs também gostam</Section.Text>
         <Section.Text variant="link">Mostrar tudo</Section.Text>
       </Section.Header>
-      <Section.Content className="grid-rows-[1fr]">
+      <Section.Content>
         {artists.map((artist) => (
           <Link href={`/artist/${artist.id}`} key={artist.id}>
             <ArtistCard artist={artist} />

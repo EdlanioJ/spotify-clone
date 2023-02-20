@@ -15,7 +15,7 @@ export default function CategoryList({ data }: Props) {
         <Section.Text>Gênero/Moods</Section.Text>
         <Section.Text variant="link">Mostrar tudo</Section.Text>
       </Section.Header>
-      <Section.Content className="grid-rows-[1fr]">
+      <Section.Content>
         {data?.categories.items.map((category) => {
           return (
             <Link href={`/genre/${category.id}`} key={category.id}>

@@ -18,7 +18,7 @@ export default function NewReleases({ data }: Props) {
         </Section.Text>
         <Section.Text variant="link">Mostrar tudo</Section.Text>
       </Section.Header>
-      <Section.Content className="grid-rows-[1fr]">
+      <Section.Content>
         {data.albums.items.map((album) => {
           return (
             <Link href={`/album/${album.id}`} key={album.id}>

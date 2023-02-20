@@ -11,7 +11,7 @@ type Props = {
 export function CategoryPlaylists({ playlists }: Props) {
   return (
     <Section>
-      <Section.Content className="auto-rows-fr gap-y-4">
+      <Section.Content isFull>
         {playlists.map((playlist) => {
           return (
             <Link href={`/playlist/${playlist.id}`} key={playlist.id}>

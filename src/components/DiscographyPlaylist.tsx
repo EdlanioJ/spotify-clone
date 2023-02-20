@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Card from './Card';
+import PlayButton from './PlayButton';
 import Section from './Section';
 
 type Props = {
@@ -23,12 +24,16 @@ export default function DiscographyPlaylist({ albums, artist }: Props) {
         <Section.Text>{`Mais de ${artist.name}`}</Section.Text>
         <Section.Text variant="link">mostrar tudo</Section.Text>
       </Section.Header>
-      <Section.Content className="grid-rows-[1fr]">
+      <Section.Content>
         {filteredAlbums.map((album) => {
           return (
             <Link href={`/album/${album.id}`} key={album.id}>
               <Card>
-                <Card.Image alt={album.id} src={album.images[0].url} />
+                <Card.Image
+                  alt={album.id}
+                  src={album.images[0].url}
+                  playBtn={<PlayButton variant="card" />}
+                />
                 <Card.Title>{album.name}</Card.Title>
                 <Card.Description>
                   {new Date(album.release_date).getFullYear()}

@@ -15,7 +15,7 @@ export default function FeaturedPlaylist({ data }: Props) {
         <Section.Text>{data?.message}</Section.Text>
         <Section.Text variant="link">Mostrar tudo</Section.Text>
       </Section.Header>
-      <Section.Content className="grid-rows-[1fr]">
+      <Section.Content>
         {data.playlists.items.map((playlist) => {
           return (
             <Link href={`/playlist/${playlist.id}`} key={playlist.id}>
