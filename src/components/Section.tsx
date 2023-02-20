@@ -20,7 +20,7 @@ type HeaderProps = {
 
 function Header({ children }: HeaderProps) {
   return (
-    <header className="flex flex-1 items-center justify-between">
+    <header className="flex flex-1 items-baseline justify-between">
       {children}
     </header>
   );
@@ -29,9 +29,19 @@ function Header({ children }: HeaderProps) {
 type ContentProps = {
   children: React.ReactNode;
   className?: string;
+  isFull?: boolean;
 };
-function Content({ children, className }: ContentProps) {
-  return <div className={clsx('grid-container', className)}>{children}</div>;
+function Content({ children, className, isFull = false }: ContentProps) {
+  return (
+    <div
+      className={clsx('grid-container', className, {
+        'auto-rows-fr gap-y-4': isFull,
+        'grid-rows-[1fr]': !isFull,
+      })}
+    >
+      {children}
+    </div>
+  );
 }
 
 type TextProps = {
