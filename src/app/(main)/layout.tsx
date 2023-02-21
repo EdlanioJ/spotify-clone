@@ -73,7 +73,7 @@ export default async function RootLayout({
       <body className="antialiased">
         <SessionProvider>
           <div className="h-screen bg-gray-700 overflow-hidden antialiased">
-            <div className="flex h-[90vh]">
+            <div className="flex h-[92vh]">
               {/* Sidebar */}
               <Sidebar playlists={playlists} />
               {/* Main */}

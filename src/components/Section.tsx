@@ -8,7 +8,7 @@ type SectionProps = {
 };
 function Section({ children }: SectionProps) {
   return (
-    <section className="flex flex-col gap-4 px-4 mt-6 overflow-y-hidden">
+    <section className="flex flex-col gap-4 px-6 mt-6 overflow-y-hidden">
       {children}
     </section>
   );

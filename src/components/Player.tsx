@@ -25,7 +25,7 @@ export default function Player({
   playingItemInfo,
 }: Props) {
   return (
-    <footer className="w-full h-[10vh] text-gray-100 bg-gray-300 z-[100] grid grid-cols-12 gap-10 items-center justify-between px-3 border-[#272727]">
+    <footer className="w-full h-[8vh] text-gray-100 bg-gray-300 z-[100] grid grid-cols-12 gap-10 items-center justify-between px-3 border-[#272727]">
       {/** Player Track Info */}
       <div className="flex items-center col-span-3 gap-3">
         {currentPlayingTrack && playingItemInfo && (
@@ -64,7 +64,7 @@ export default function Player({
         )}
       </div>
       {/** Main Controller */}
-      <div className="flex flex-col justify-center items-center col-span-6 gap-3">
+      <div className="flex flex-col justify-center items-center col-span-6 gap-1">
         <div className="flex items-center gap-5 text-lg">
           <Shuffle />
           <SkipBack weight="fill" />

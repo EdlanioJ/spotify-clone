@@ -95,7 +95,7 @@ export default async function HomePage() {
   } = await fetchData();
 
   return (
-    <div className="pb-20">
+    <div>
       <MyRecentlyPlayed
         playHistory={myRecentlyPlayedTracks.items}
         artists={artistsInMyRecentlyPlayed}
@@ -107,6 +107,8 @@ export default async function HomePage() {
       <NewReleases data={newReleases} />
       <TopListPlaylist playlists={topLists.playlists.items} />
       <FeaturedPlaylist data={featuredPlaylist} />
+
+      <hr className="h-px mx-6 mt-16 mb-20 bg-zinc-800 border-0 dark:bg-gray-700" />
       <Recolor />
     </div>
   );

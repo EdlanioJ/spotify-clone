@@ -25,7 +25,7 @@ export default function PlayButton({
           'w-11 h-11': variant === 'default',
           'w-11 h-11 absolute top-[60%] right-[6%] translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0':
             variant === 'card',
-          'w-9 h-9 absolute top-[12%] right-[4%] translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0':
+          'w-9 h-9 lg:w-11 lg:h-11 absolute top-[12%] right-[4%] translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0':
             variant === 'recent',
         }
       )}
