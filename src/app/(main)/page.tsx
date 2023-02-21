@@ -9,6 +9,7 @@ import { Recolor } from '@context/ColorContext';
 import MySavedShows from './MySavedShows';
 import TopListPlaylist from './TopListPlaylist';
 import MyRecentlyPlayed from './MyRecentlyPlayed';
+import Line from '@components/Line';
 
 async function fetchData() {
   const session = await getServerSession(authOptions);
@@ -108,7 +109,7 @@ export default async function HomePage() {
       <TopListPlaylist playlists={topLists.playlists.items} />
       <FeaturedPlaylist data={featuredPlaylist} />
 
-      <hr className="h-px mx-6 mt-16 mb-20 bg-zinc-800 border-0 dark:bg-gray-700" />
+      <Line />
       <Recolor />
     </div>
   );
