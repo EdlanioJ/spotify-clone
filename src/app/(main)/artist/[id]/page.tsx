@@ -60,8 +60,13 @@ export default async function Page({ params }: Props) {
       <Cover artist={artist} />
       <ArtistTopTracks tracks={artistTopTracks} />
       <ArtistAlbums albums={artistAlbums} singles={artistSingles} />
-      <ArtistRelated artists={artistRelatedArtists} />
-      <ArtistAppearsOn albums={artistAppearsOn} artist={artist.name} />
+      {artistRelatedArtists && artistRelatedArtists.length !== 0 && (
+        <ArtistRelated artists={artistRelatedArtists} />
+      )}
+
+      {artistAppearsOn && artistAppearsOn.length !== 0 && (
+        <ArtistAppearsOn albums={artistAppearsOn} artist={artist.name} />
+      )}
       <Line />
     </div>
   );
