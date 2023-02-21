@@ -1,4 +1,5 @@
 import { authOptions } from '@api/auth/[...nextauth]';
+import Line from '@components/Line';
 import { Recolor } from '@context/ColorContext';
 import { spotifyApi } from '@libs/spotify';
 import { getServerSession } from 'next-auth';
@@ -34,7 +35,7 @@ export default async function QueryPage({ params }: Props) {
   const { tracks, artists, albums, playlists, shows, episodes } =
     await fetchData(params.query);
   return (
-    <div className="pb-20">
+    <div>
       {tracks && tracks.items.length !== 0 && (
         <SearchTracksResult tracks={tracks.items} />
       )}
@@ -55,6 +56,7 @@ export default async function QueryPage({ params }: Props) {
       {episodes && episodes.items.length !== 0 && (
         <SearchEpisodesResult episodes={episodes.items} />
       )}
+      <Line />
       <Recolor />
     </div>
   );

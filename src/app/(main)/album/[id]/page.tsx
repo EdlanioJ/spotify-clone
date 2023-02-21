@@ -2,6 +2,7 @@ import { authOptions } from '@api/auth/[...nextauth]';
 import AlbumCover from '@components/AlbumCover';
 import AlbumTrackTable from '@components/AlbumTrackTable';
 import DiscographyPlaylist from '@components/DiscographyPlaylist';
+import Line from '@components/Line';
 import { spotifyApi } from '@libs/spotify';
 import { getServerSession } from 'next-auth';
 
@@ -29,7 +30,7 @@ export default async function AlbumPage({ params }: PageProps) {
   const { album, discography } = await fetchData(params.id);
 
   return (
-    <div className="absolute w-full top-0 pb-14">
+    <div className="absolute w-full top-0">
       <AlbumCover album={album} />
       <AlbumTrackTable tracks={album.tracks} />
       <div className="mt-4 mb-6 px-4 text-[12px] font-semibold text-gray-100 flex flex-col">
@@ -53,6 +54,7 @@ export default async function AlbumPage({ params }: PageProps) {
         artist={album.artists[0]}
         albums={discography.items}
       />
+      <Line />
     </div>
   );
 }

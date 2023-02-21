@@ -50,14 +50,16 @@ export default function AlbumTrackTable({ tracks }: Props) {
                         {track.name}
                       </span>
                       <span className="truncate font-semibold">
-                        {track.artists.map((artist) => (
-                          <Link
-                            href={`/artist/${artist.id}`}
-                            className="hover:underline"
-                            key={artist.id}
-                          >
-                            {artist.name}
-                          </Link>
+                        {track.artists.map((artist, index) => (
+                          <span key={artist.id}>
+                            <Link
+                              href={`/artist/${artist.id}`}
+                              className="hover:underline"
+                            >
+                              {artist.name}
+                            </Link>
+                            {track.artists.length - 1 !== index && ', '}
+                          </span>
                         ))}
                       </span>
                     </div>

@@ -8,6 +8,7 @@ import ArtistTopTracks from './ArtistTopTracks';
 import ArtistAlbums from './ArtistAlbums';
 import ArtistAppearsOn from './ArtistAppearsOn';
 import ArtistRelated from './ArtistRelated';
+import Line from '@components/Line';
 
 type Props = {
   params: { id: string };
@@ -55,12 +56,13 @@ export default async function Page({ params }: Props) {
   } = await fetchData(params.id);
 
   return (
-    <div className="absolute top-0 w-full pb-14">
+    <div className="absolute top-0 w-full">
       <Cover artist={artist} />
       <ArtistTopTracks tracks={artistTopTracks} />
       <ArtistAlbums albums={artistAlbums} singles={artistSingles} />
       <ArtistRelated artists={artistRelatedArtists} />
       <ArtistAppearsOn albums={artistAppearsOn} artist={artist.name} />
+      <Line />
     </div>
   );
 }

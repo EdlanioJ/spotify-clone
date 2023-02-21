@@ -38,7 +38,7 @@ export default function TrackTable({ tracks }: Props) {
           <Clock weight="bold" />
         </div>
       </div>
-      <ul className="px-2 mb-10">
+      <ul className="px-2">
         {tracks.items.map(
           (track, index) =>
             track.track && (

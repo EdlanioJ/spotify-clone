@@ -1,8 +1,9 @@
+import { getServerSession } from 'next-auth';
 import { authOptions } from '@api/auth/[...nextauth]';
+import { spotifyApi } from '@libs/spotify';
 import { CategoryCover } from '@components/CategoryCover';
 import { CategoryPlaylists } from '@components/CategoryPlaylists';
-import { spotifyApi } from '@libs/spotify';
-import { getServerSession } from 'next-auth';
+import Line from '@components/Line';
 
 type PageProps = {
   params: {
@@ -34,6 +35,7 @@ export default async function Page({ params }: PageProps) {
     <div className="w-full">
       <CategoryCover data={genre} />
       <CategoryPlaylists playlists={playlists.items} />
+      <Line />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { authOptions } from '@api/auth/[...nextauth]';
+import Line from '@components/Line';
 import PlaylistCover from '@components/PlaylistCover';
 import TrackTable from '@components/TrackTable';
 import { spotifyApi } from '@libs/spotify';
@@ -27,6 +28,7 @@ export default async function Page({ params }: PageProps) {
     <div className="absolute top-0">
       <PlaylistCover playlist={playlist} />
       <TrackTable tracks={playlist.tracks} />
+      <Line />
     </div>
   );
 }
